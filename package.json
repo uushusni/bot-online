@@ -1,0 +1,21 @@
+{
+  "name": "discordbotgua",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "HENTAI",
+  "license": "ISC",
+  "dependencies": {
+    "discord-ytdl-core": "^5.0.1",
+    "discord.js": "^12.5.1",
+    "merge-options": "^3.0.4",
+    "noblox.js": "^4.8.4",
+    "node-fetch": "^2.6.1",
+    "spotify-url-info": "^2.2.0",
+    "youtube-sr": "^4.0.3",
+    "ytdl-core": "^4.5.0"
+  }
+}
