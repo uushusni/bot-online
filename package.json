@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "alexa-bot-api": "^0.2.1",
     "discord.js": "^12.5.1",
     "ms": "^2.1.3",
     "weather-js": "^2.0.0"

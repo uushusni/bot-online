@@ -77,3 +77,15 @@ client.on('guildBanRemove', (guild, user) => {
 });
 
 client.login('ODE2NjA3MjA1NTM2NDMyMTI4.YD9auQ.O0sQ-BqLNeK-IP_B02I3QUQlK2Q')
+
+
+const alexa = require("alexa-bot-api");
+var chatbot = new alexa("aw2plm");
+
+  
+client.on("message", async message => {
+  if (message.author.bot) return;
+    let content = message.content;
+      if(!content) return;
+          chatbot.getReply(content).then(r => message.channel.send(r));
+            });

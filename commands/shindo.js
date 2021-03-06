@@ -7,8 +7,7 @@ module.exports = {
             .setTitle('SHINDO LIFE SCRIPT')
             .setThumbnail(message.author.displayAvatarURL())
             .addFields(
-                {name: '1', value: '```loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/z4gs/scripts/master/Ro-Ghoul%20Auto%20Farm.lua"))()```'},
-                {name: '2', value: '```loadstring(game:HttpGet("https://pastebin.com/raw/i53Y3rew",true))()```'}
+                {name: '1', value: '```loadstring(game:HttpGet("https://pastebin.com/raw/i53Y3rew",true))()```'}
             )
             .setAuthor(message.author.username)
             .addField('STATUS', 'work')
