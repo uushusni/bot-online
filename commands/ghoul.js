@@ -6,7 +6,7 @@ module.exports = {
             .setColor(0x6509ed)
             .setTitle('RO-GHOUL SCRIPT')
             .setThumbnail(message.author.displayAvatarURL())
-            .addField(
+            .addFields(
                 {name: '1', value:'```loadstring(game:HttpGet("https://raw.githubusercontent.com/BunnySalf/Hentai/main/MHEEHUB",true))()```'},
                 {name: '2', value: '```loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/z4gs/scripts/master/Ro-Ghoul%20Auto%20Farm.lua"))()```'}
                 )
