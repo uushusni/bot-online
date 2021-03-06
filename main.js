@@ -72,6 +72,12 @@ client.on('guildBanRemove', (guild, user) => {
         client.commands.get('whois').run(client, message, args);
     }if (command == 'weather'){
         client.commands.get('weather').run(client, message, args);
+    }if (command == 'serverinfo'){
+        client.commands.get('serverinfo').run(client, message, args);
+    }if (command == 'weather'){
+        client.commands.get('weather').run(client, message, args);
+    }if (command == 'botinfo'){
+        client.commands.get('botinfo').run(client, message, args);
     }
 
 });
