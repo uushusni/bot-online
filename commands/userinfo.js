@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 const ms = require('ms')
 
 module.exports = {
-    name: 'whois',
+    name: 'userinfo',
     description: 'Know Others Information',
     category: 'Utility',
     guildOnly: true,
@@ -26,7 +26,7 @@ module.exports = {
           .addField("**Joined On:**", `${member.joinedAt.toLocaleString()}`, true)
           .addField("**Created On:**", `${member.user.createdAt.toLocaleString()}`, true)
           .setDescription(`${member.roles.cache.map(role => role.toString()).join(' ')}`)
-          .setFooter(`© ${message.guild.me.displayName}`, "https://cdn.discordapp.com/avatars/796748319518097419/6417c8b4c69da903eef8db73e435e5c3.png?size=512");
+          .setFooter(`© ${message.guild.me.displayName}`, "https://cdn.discordapp.com/attachments/703249982790303835/817765470354538536/unknown.png?size=512");
 
         message.channel.send(embed);
       } else {
