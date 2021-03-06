@@ -6,8 +6,10 @@ module.exports = {
             .setColor(0x6509ed)
             .setTitle('SHINDO LIFE SCRIPT')
             .setThumbnail(message.author.displayAvatarURL())
-            .setDescription('```loadstring(game:HttpGet("https://pastebin.com/raw/i53Y3rew",true))()```')
-            .setDescription('```loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/z4gs/scripts/master/Ro-Ghoul%20Auto%20Farm.lua"))()```')
+            .addFields(
+                {name: '1', value: '```loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/z4gs/scripts/master/Ro-Ghoul%20Auto%20Farm.lua"))()```'},
+                {name: '2', value: '```loadstring(game:HttpGet("https://pastebin.com/raw/i53Y3rew",true))()```'}
+            )
             .setAuthor(message.author.username)
             .addField('STATUS', 'work')
             .setFooter('DM owner jika ada script yg mau request')
