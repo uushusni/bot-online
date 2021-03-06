@@ -1,6 +1,9 @@
 const Discord = require('discord.js');
+const weather = require('weather-js');
 
 const client = new Discord.Client();
+const bot = new Discord.Client();
+
 
 const prefix = '-';
 
@@ -17,31 +20,60 @@ for(const file of commandFiles){
 }
 
 client.once('ready', () => {
-    console.log('HENTAI is online!');
-});
+    console.log('denim is online!');
+    client.user.setActivity('pornhub', { type: 'WATCHING'}).catch(console.error);
+})
 
 client.on('message', message =>{
     if(!message.content.startsWith(prefix) || message.author.bot) return;
+
+client.on('guildMemberAdd', member => {
+
+})
+client.on('guildMemberRemove', member => {
+
+})
+client.on('guildBanAdd', (guild, user) => {
+
+})
+client.on('guildBanRemove', (guild, user) => {
+    
+})
 
     const args = message.content.slice(prefix.length).split(/ +/);
     const command = args.shift().toLowerCase();
 
     if(command === 'executor'){
-        client.commands.get('executor').execute(message, args);
-    }if (command == 'script'){
-        client.commands.get('script').execute(message, args);
+        client.commands.get('executor').execute(message, args, Discord);
     }if (command == 'clear'){
         client.commands.get('clear').execute(message, args);
     }if (command == 'ping'){
         let ping = Math.floor(message.client.ws.ping);
         message.channel.send(':ping_pong: `'+ping+' ms.`');
+    }if (command == 'arsenal'){
+        client.commands.get('arsenal').execute(message, args, Discord);
+    }if (command == 'jojo'){
+        client.commands.get('jojo').execute(message, args, Discord);
+    }if (command == 'list'){
+        client.commands.get('list').execute(message, args, Discord);
+    }if (command == 'prox'){
+        client.commands.get('prox').execute(message, args, Discord);
+    }if (command == 'shindo'){
+        client.commands.get('shindo').execute(message, args, Discord);
+    }if (command == 'ghoul'){
+        client.commands.get('ghoul').execute(message, args, Discord);
     }if (command == 'kp'){
-        message.channel.send('https://www.roblox.com/games/4520749081/Second-Sea-King-Piece?privateServerLinkCode=JhJZScwfQOvCVRRXRcFZobcyvNuXqu6a');
-    }if (command == 'gpo'){
-        message.channel.send('https://www.roblox.com/games/1730877806/VALENTINE-EVENT-Grand-Piece-Online?refPageId=a44df231-3dbd-42bc-93f7-1861577ded34');
+        client.commands.get('kp').execute(message, args, Discord);
+    }if (command == 'bf'){
+        client.commands.get('bf').execute(message, args, Discord);
+    }if (command == 'wisteria'){
+        client.commands.get('wisteria').execute(message, args, Discord);
+    }if (command == 'whois'){
+        client.commands.get('whois').run(client, message, args);
+    }if (command == 'weather'){
+        client.commands.get('weather').run(client, message, args);
     }
-    
 
 });
 
-client.login('ODE2NjA3MjA1NTM2NDMyMTI4.YD9auQ.ENIt4MWkKkCY1keN3lW1WeqGwp0')
+client.login('ODE2NjA3MjA1NTM2NDMyMTI4.YD9auQ.O0sQ-BqLNeK-IP_B02I3QUQlK2Q')
