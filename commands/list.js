@@ -1,8 +1,9 @@
+const Discord = require("discord.js")
 module.exports = {
     name: 'list',
     description: "Embeds",
-    execute(message, args, Discord) {
-        const newEmbed = new Discord.MessageEmbed()
+    execute(message, args, client) {
+        const embed = new Discord.MessageEmbed()
             .setColor(0x6509ed)
             .setTitle('LIST SCRIPT')
             .setThumbnail(message.author.displayAvatarURL())
@@ -18,7 +19,7 @@ module.exports = {
             )
             .setThumbnail(message.author.displayAvatarURL())
             .setTimestamp()
-            message.channel.send(newEmbed);
+            message.channel.send(embed);
         
     }
 }

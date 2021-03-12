@@ -1,87 +1,59 @@
-const Discord = require('discord.js');
-const weather = require('weather-js');
+const Discord = require('discord.js')
+const ms = require('ms')
+const fs = require('fs')
+const chalk = require('chalk')
+const db = require('quick.db')
+const { token,PREFIX } = require('./config.json')
+const client = new Discord.Client()
+const { GiveawaysManager } = require('discord-giveaways')
 
-const client = new Discord.Client();
-const bot = new Discord.Client();
+const sendMessage = require('./send-message')
+const commandFiles = fs.readdirSync('./Commands').filter(file => file.endsWith('.js'))
+client.giveaways = new GiveawaysManager(client, {
+    storage: './giveaways.json',
+    updateCountdownEvery: 5000,
+    embedColor: '#ff0000',
+    reaction: '🎉'
+})
 
-
-const prefix = ',';
-
-const fs = require('fs');
-
-
-client.commands = new Discord.Collection();
-
-const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
-for(const file of commandFiles){
-    const command = require(`./commands/${file}`);
-
+client.commands = new Discord.Collection()
+for (const file of commandFiles) {
+    const command = require(`./Commands/${file}`);
     client.commands.set(command.name, command);
 }
-
+require("http").createServer((req, res) => res.end("alive")).listen();
 client.once('ready', () => {
-    console.log('denim is online!');
-    client.user.setActivity('pornhub', { type: 'WATCHING'}).catch(console.error);
-})
 
-client.on('message', message =>{
-    if(!message.content.startsWith(prefix) || message.author.bot) return;
-
-client.on('guildMemberAdd', member => {
-
-})
-client.on('guildMemberRemove', member => {
-
-})
-client.on('guildBanAdd', (guild, user) => {
-
-})
-client.on('guildBanRemove', (guild, user) => {
-    
-})
-
-    const args = message.content.slice(prefix.length).split(/ +/);
-    const command = args.shift().toLowerCase();
-
-    if(command === 'executor'){
-        client.commands.get('executor').execute(message, args, Discord);
-    }if (command == 'clear'){
-        client.commands.get('clear').execute(message, args);
-    }if (command == 'ping'){
-        let ping = Math.floor(message.client.ws.ping);
-        message.channel.send(':ping_pong: `'+ping+' ms.`');
-    }if (command == 'arsenal'){
-        client.commands.get('arsenal').execute(message, args, Discord);
-    }if (command == 'jojo'){
-        client.commands.get('jojo').execute(message, args, Discord);
-    }if (command == 'list'){
-        client.commands.get('list').execute(message, args, Discord);
-    }if (command == 'prox'){
-        client.commands.get('prox').execute(message, args, Discord);
-    }if (command == 'shindo'){
-        client.commands.get('shindo').execute(message, args, Discord);
-    }if (command == 'ghoul'){
-        client.commands.get('ghoul').execute(message, args, Discord);
-    }if (command == 'kp'){
-        client.commands.get('kp').execute(message, args, Discord);
-    }if (command == 'bf'){
-        client.commands.get('bf').execute(message, args, Discord);
-    }if (command == 'wisteria'){
-        client.commands.get('wisteria').execute(message, args, Discord);
-    }if (command == 'whois'){
-        client.commands.get('whois').run(client, message, args);
-    }if (command == 'weather'){
-        client.commands.get('weather').run(client, message, args);
-    }if (command == 'serverinfo'){
-        client.commands.get('serverinfo').run(client, message, args);
-    }if (command == 'weather'){
-        client.commands.get('weather').run(client, message, args);
-    }if (command == 'botinfo'){
-        client.commands.get('botinfo').run(client, message, args);
-    }if (command == 'userinfo'){
-        client.commands.get('userinfo').run(client, message, args);
-    }
-
+    console.log(chalk.bgGreenBright.black("[" + client.user.username + "]"), "Bot Online");
+    client.user.setActivity('NEKOPOI', {
+        type: "WATCHING"
+    });
 });
 
-client.login('ODE2NjA3MjA1NTM2NDMyMTI4.YD9auQ.O0sQ-BqLNeK-IP_B02I3QUQlK2Q')
+client.on('messageDelete', async message => {
+    db.set(`msg_${message.channel.id}`, message.content)
+    db.set(`author_${message.channel.id}`, message.author.id)
+})
+
+client.on('message', async message => {
+	const prefix = PREFIX
+    
+
+    if (!message.content.startsWith(prefix)) return;
+
+    const args = message.content.slice(prefix.length).trim().split(/ +/);
+    const commandName = args.shift().toLowerCase();
+
+    const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+
+    if (!command) return;
+    try {
+        command.execute(message, args, client);
+        console.log(chalk.greenBright('[COMMAND]'), `${message.author.tag} used the command ` + commandName)
+    } catch (error) {
+        console.log(error);
+        message.reply('there was an error trying to execute that command! ```\n' + error + "\n```");
+    }
+});
+
+client.login(token)

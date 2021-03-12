@@ -4,7 +4,7 @@ const weather = require('weather-js');
 module.exports = {
     name: "weather",
     category: "extra",
-    run: async (client, message, args) => {
+    async execute(message, args){
         let city = args.join(" ");
         let degreetype = "C";
 
@@ -31,7 +31,6 @@ module.exports = {
             .addField("Suhu", `${current.temperature}°Degree`, true)
             .addField("Waktu Pengamatan", current.observationtime, true)
             
-            return message.channel.send(embed);
             
         })
     }

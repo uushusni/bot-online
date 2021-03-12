@@ -1,7 +1,8 @@
+const Discord = require('discord.js')
 module.exports = {
     name: 'wisteria',
     description: "Embeds",
-    execute(message, args, Discord) {
+    execute(message, args, client) {
         const newEmbed = new Discord.MessageEmbed()
             .setColor(0x6509ed)
             .setTitle('Wisteria SCRIPT')

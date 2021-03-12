@@ -1,7 +1,9 @@
+const config = require('../config.json')
 module.exports = {
     name: 'clear',
     description: "clear messages",
     async execute(message, args){
+        if (message.author.id === config.owner){
         if(!args[0]) return message.reply("enter the amount to delete shithead!");
         if(isNaN(args[0])) return message.reply("enter the real number sucker!");
 
@@ -12,4 +14,15 @@ module.exports = {
             message.channel.bulkDelete(messages);
         });
     }
+    else {
+        let cannotUse = new Discord.MessageEmbed()
+            .setDescription('You cannot use this command SHIT HEAD!. Only **OWNERS&STAFF** can use this.')
+            .setAuthor(message.author.username, message.author.avatarURL({
+                dynamic: true
+            }))
+            .setColor('RED')
+            .setFooter(message.client.user.username, message.client.user.avatarURL())
+        message.channel.send(cannotUse)
+    }
+}
 }

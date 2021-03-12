@@ -18,7 +18,7 @@ module.exports = {
     usage: 'botinfo',
     category: 'Utility',
     guildOnly: true,
-    async run(client, message, args) {
+    execute(message, args, client) {
         let cpuLol;
         cpuStat.usagePercent(async function (err, percent, seconds) {
             if (err) {

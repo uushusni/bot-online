@@ -1,8 +1,9 @@
+const Discord = require('discord.js')
 module.exports = {
     name: 'executor',
     description: "link download",
-    execute(message, args, Discord){
-        const newEmbed = new Discord.MessageEmbed()
+    execute(message, args, client){
+    const embed = new Discord.MessageEmbed()
         .setColor(0x6509ed)
         .setTitle('EXECUTOR')
         .setDescription('https://keshhub.com/bootstrapper/krnl_console_bootstrapper.exe')
@@ -11,8 +12,8 @@ module.exports = {
         .setThumbnail(message.author.displayAvatarURL())
         .setFooter('DM owner jika terjadi error')
         .setTimestamp()
-        message.author.send(newEmbed);
-    const newEmbed1 = new Discord.MessageEmbed()
+        message.author.send(embed);
+    const embed1 = new Discord.MessageEmbed()
         .setColor(0x6509ed)
         .setTitle('Reds_Pirates')
         .setThumbnail(message.author.displayAvatarURL())
@@ -20,6 +21,6 @@ module.exports = {
         .addField('Check Youre DM to download', 'Reds_Pirates || Comunity')
         .addField('Tonton kalo bingung', 'https://www.youtube.com/watch?v=iFqJ9xzPpGw')
         .setTimestamp()
-        message.channel.send(newEmbed1);
+        message.channel.send(embed1);
     }
 }
