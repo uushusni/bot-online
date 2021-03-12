@@ -1,41 +1,37 @@
-const Discord = require('discord.js');
 const weather = require('weather-js');
+
+const Discord = require('discord.js');
 
 module.exports = {
     name: "weather",
-    category: "extra",
-    async execute(message, args){
-        let city = args.join(" ");
-        let degreetype = "C";
+    description: "Checks a weather forecast",
 
-        await weather.find({search: city, degreeType: degreetype}, function(err, result){
-            if (!city) return message.channel.send("Insert the city");
-            if (err || result === undefined || result.length === 0) return message.channel.send("Unknown City Bitch");
+    async execute(message, args, client){
 
-            let current = result[0].current;
-            let location = result[0].location;
+    weather.find({search: args.join(" "), degreeType: 'F'}, function (error, result){
+        // 'C' can be changed to 'F' for farneheit results
+        if(error) return message.channel.send(error);
+        if(!args[0]) return message.channel.send('Please specify a location')
 
-            const embed = new Discord.MessageEmbed()
-            .setAuthor(current.observationpoint)
-            .setDescription(`> ${current.skytext}`)
-            .setThumbnail(current.imageUrl)
-            .setTimestamp()
-            .setColor(0x7289DA)
+        if(result === undefined || result.length === 0) return message.channel.send('**Invalid** location');
 
-            embed.addField("Garis Lintang", location.lat, true)
-            .addField("Garis bujur", location.long, true)
-            .addField("Terasa seperti", `${current.feelslike} °Degree`, true)
-            .addField("Jenis derajat", location.degreetype, true)
-            .addField("Kelembaban", `${current.humidity}%`, true)
-            .addField("Zona waktu", `GMT ${location.timezone}`, true)
-            .addField("Suhu", `${current.temperature}°Degree`, true)
-            .addField("Waktu Pengamatan", current.observationtime, true)
-            
-            
-        })
+        var current = result[0].current;
+        var location = result[0].location;
+
+        const weatherinfo = new Discord.MessageEmbed()
+        .setDescription(`**${current.skytext}**`)
+        .setAuthor(`Weather forecast for ${current.observationpoint}`)
+        .setThumbnail(current.imageUrl)
+        .setColor(0x111111)
+        .addField('Timezone', `UTC${location.timezone}`, true)
+        .addField('Degree Type', 'Celsius', true)
+        .addField('Temperature', `${current.temperature}°`, true)
+        .addField('Wind', current.winddisplay, true)
+        .addField('Feels like', `${current.feelslike}°`, true)
+        .addField('Humidity', `${current.humidity}%`, true)
+
+
+        message.channel.send(weatherinfo)
+        })        
     }
-    
-    
-
 }
-

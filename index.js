@@ -8,7 +8,7 @@ const client = new Discord.Client()
 const { GiveawaysManager } = require('discord-giveaways')
 
 const sendMessage = require('./send-message')
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'))
+const commandFiles = fs.readdirSync('./Commands').filter(file => file.endsWith('.js'))
 client.giveaways = new GiveawaysManager(client, {
     storage: './giveaways.json',
     updateCountdownEvery: 5000,
@@ -18,7 +18,7 @@ client.giveaways = new GiveawaysManager(client, {
 
 client.commands = new Discord.Collection()
 for (const file of commandFiles) {
-    const command = require(`./commands/${file}`);
+    const command = require(`./Commands/${file}`);
     client.commands.set(command.name, command);
 }
 require("http").createServer((req, res) => res.end("alive")).listen();

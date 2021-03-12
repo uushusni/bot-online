@@ -1,5 +1,5 @@
 const Discord = require('discord.js')
-const client = require('../main.js')
+const client = require('../index.js')
 const db = require('quick.db')
 
 module.exports = {
