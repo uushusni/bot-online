@@ -5,11 +5,11 @@ const config = require('../config.json')
  
 module.exports = {
     name: 'warn',
-    description: 'Snipe a deleted message',
+    description: 'warn user',
     usage: 'warn',
     category: 'Fun',
     guildOnly: true,
-    async execute(message, args) {
+    async execute(message, args, client) {
         if (message.author.id === config.owner){
     var user = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
     if(!user) return message.reply('mention user shithead!')
