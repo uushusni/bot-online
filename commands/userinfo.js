@@ -6,7 +6,7 @@ module.exports = {
     description: 'Know Others Information',
     category: 'Utility',
     guildOnly: true,
-    async run(client, message, args){
+    async execute(client, message, args){
 		if(args.length > 1) return message.channel.send('Only mention one user!');
     if(!args[0]) return message.channel.send('Mention someone!');
 
