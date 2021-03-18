@@ -5,20 +5,14 @@ const chalk = require('chalk')
 const db = require('quick.db')
 const { token,PREFIX } = require('./config.json')
 const client = new Discord.Client()
-const { GiveawaysManager } = require('discord-giveaways')
+const prefix = PREFIX
 
 const sendMessage = require('./send-message')
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'))
-client.giveaways = new GiveawaysManager(client, {
-    storage: './giveaways.json',
-    updateCountdownEvery: 5000,
-    embedColor: '#ff0000',
-    reaction: '🎉'
-})
+const commandFiles = fs.readdirSync('./Commands').filter(file => file.endsWith('.js'))
 
 client.commands = new Discord.Collection()
 for (const file of commandFiles) {
-    const command = require(`./commands/${file}`);
+    const command = require(`./Commands/${file}`);
     client.commands.set(command.name, command);
 }
 require("http").createServer((req, res) => res.end("alive")).listen();
@@ -36,7 +30,18 @@ client.on('messageDelete', async message => {
 })
 
 client.on('message', async message => {
-	const prefix = PREFIX
+
+    if(db.has(`afk-${message.author.id}+${message.guild.id}`)) {
+        const info = db.get(`afk-${message.author.id}+${message.guild.id}`)
+        await db.delete(`afk-${message.author.id}+${message.guild.id}`)
+        message.reply(`Your afk status have been removed (${info})`)
+    }
+    //checking for mentions
+    if(message.mentions.members.first()) {
+        if(db.has(`afk-${message.mentions.members.first().id}+${message.guild.id}`)) {
+            message.channel.send(db.get(`afk-${message.mentions.members.first().id}+${message.guild.id }`))
+        }else return;
+    }else;
     
 
     if (!message.content.startsWith(prefix)) return;

@@ -1,37 +1,33 @@
-const Discord = require('discord.js')
-const ms = require('ms')
+const { MessageEmbed } = require('discord.js')
+const moment = require('moment') // npm i moment
+moment.locale('ENG')
 
-module.exports = {
+module.exports ={
     name: 'userinfo',
-    description: 'Know Others Information',
-    category: 'Utility',
-    guildOnly: true,
-    async execute(client, message, args){
-		if(args.length > 1) return message.channel.send('Only mention one user!');
-    if(!args[0]) return message.channel.send('Mention someone!');
+    description: "Moderation",
+    async execute(message, args, client) {
 
-    if(args[0]){
-      let member = message.mentions.members.first();
+        const member = message.mentions.members.first() || message.member
+        // For Status Of User, We Will Use Emoji To Look Nice
+        const status = {
+            online: '🟢:- Online',
+            idle: '🟡:- Idle',
+            dnd: '🔴:- DND',
+            offline: '⚫:- Offline'
+        }
 
-      if(member) {
-        let embed = new Discord.MessageEmbed()
-          .setColor("fffff")
-          .setTitle("User Info")
-          .setThumbnail(member.user.displayAvatarURL())
-          .setAuthor(`${member.user.tag} (${member.id})`, member.user.displayAvatarURL())
-          .addField("**Username:**", `${member.user.username}`, true)
-          .addField("**Discriminator:**", `${member.user.discriminator}`, true)
-          .addField("**ID:**", `${member.user.id}`, true)
-          .addField("**Status:**", `${member.user.presence.status}`, true)
-          .addField("**Joined On:**", `${member.joinedAt.toLocaleString()}`, true)
-          .addField("**Created On:**", `${member.user.createdAt.toLocaleString()}`, true)
-          .setDescription(`${member.roles.cache.map(role => role.toString()).join(' ')}`)
-          .setFooter(`© ${message.guild.me.displayName}`, "https://cdn.discordapp.com/attachments/703249982790303835/817765470354538536/unknown.png?size=512");
-
-        message.channel.send(embed);
-      } else {
-          message.channel.send(`Could not find that member`);
-      }
+        const embed = new MessageEmbed()
+        .setColor('GOLD')
+        .setTitle(`User Info Of ${member.user.username}`, member.user.displayAvatarURL())
+        .setThumbnail(member.user.displayAvatarURL({dynamic: true, size: 512}))
+        .addField('🕵️‍♂️**User-Name**', `${member.user.username}#${member.user.discriminator}`) // We Use Emojis Also
+        .addField('#️⃣**User ID**', `${member.id}`)
+        .addField('**Status**', `${status[member.presence.status]}`)
+        .addField('📗**Account Created**', `${moment.utc(member.user.createdAt).format('LLLL')}`)
+        .addField('🎉**Joined Server**', `${moment.utc(member.joinedAt).format('LLLL')}`)
+        .addField('📢**VC**', member.voice.channel ? member.voice.channel.name + `(${member.voice.channel.id})` : 'Not In A VC')
+        .addField('🎇**Roles**', `${member.roles.cache.map(role => role.toString())}`, true)
+        // Add More Fields If Want
+        message.channel.send(embed)
     }
-	}
 }
