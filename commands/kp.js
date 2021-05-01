@@ -7,7 +7,7 @@ module.exports = {
             .setColor(0x6509ed)
             .setTitle('KING PIECE SCRIPT')
             .setThumbnail(message.author.displayAvatarURL())
-            .setDescription('```loadstring(game:HttpGet("https://raw.githubusercontent.com/AltsegoD/script/master/KingPiece.lua",true))()```')
+            .setDescription('```loadstring(game:HttpGet("https://raw.githubusercontent.com/sannin9000/scripts/main/kinglegacy.lua"))()```')
             .setAuthor(message.author.username)
             .addField('STATUS', 'work')
             .setFooter('DM owner jika ada script yg mau request')
