@@ -18,7 +18,9 @@ module.exports = {
                 {name: '8', value: 'ShindoLife(!shindo)'},
                 {name: '9', value: 'Wisteria(!wisteria)'},
                 {name: '10', value: 'anime mania(!anm)'},
-                {name: '11', value: 'last piece(!lp)'}
+                {name: '11', value: 'last piece(!LP)'},
+                {name: '12', value: 'your bizare adventure(!yba)'},
+                {name: '13', value: 'Grand Piece Online(!GPO)'}
             )
             .setThumbnail(message.author.displayAvatarURL())
             .setTimestamp()
