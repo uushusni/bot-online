@@ -471,7 +471,7 @@
                                     } catch (err) {
                                         if (debug) console.log('[Debug] No Continue Found', err);
                                     }
-                                }, 100);
+                                }, 300);
                             }
                             return true;
                         }
@@ -604,7 +604,7 @@
                 retryCount++;
                 if (debug) console.log(`[Debug] Spoofing attempt #${retryCount}`);
                 spoofWorkink();
-                setTimeout(keepSpoofing, 1000);
+                setTimeout(keepSpoofing, 3000);
             }
             keepSpoofing();
             if (debug) console.log('[Debug] Waiting for server to send destination data...');
@@ -779,7 +779,7 @@
                 let waitTimeSeconds = 5;
                 const url = location.href;
                 if (url.includes('42rk6hcq') || url.includes('ito4wckq') || url.includes('pzarvhq1')) {
-                    waitTimeSeconds = 38;
+                    waitTimeSeconds = 15;
                 }
 
                 if (secondsPassed >= waitTimeSeconds) {
