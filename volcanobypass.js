@@ -776,10 +776,10 @@
                 destinationReceived = true;
                 if (debug) console.log('[Debug] Destination data:', data.url);
 
-                let waitTimeSeconds = 15;
+                let waitTimeSeconds = 5;
                 const url = location.href;
                 if (url.includes('42rk6hcq') || url.includes('ito4wckq') || url.includes('pzarvhq1')) {
-                    waitTimeSeconds = 15;
+                    waitTimeSeconds = 20;
                 }
 
                 if (secondsPassed >= waitTimeSeconds) {
