@@ -769,14 +769,14 @@
             }, 1000);
         }
 
-        function createDestinationProxy() {
+        function  {
             return function(...args) {
                 const data = args[0];
                 const secondsPassed = (Date.now() - startTime) / 1000;
                 destinationReceived = true;
                 if (debug) console.log('[Debug] Destination data:', data.url);
 
-                let waitTimeSeconds = 5;
+                let waitTimeSeconds = 15;
                 const url = location.href;
                 if (url.includes('42rk6hcq') || url.includes('ito4wckq') || url.includes('pzarvhq1')) {
                     waitTimeSeconds = 15;
@@ -803,7 +803,7 @@
 
             const sendMessageProxy = createSendMessageProxy();
             const onLinkInfoProxy = createLinkInfoProxy();
-            const onDestinationProxy = createDestinationProxy();
+            const onDestinationProxy = ;
 
             Object.defineProperty(sessionControllerA, send.name, {
                 get() { return sendMessageProxy },
